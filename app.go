@@ -8,9 +8,9 @@ import (
 	"gopkg.in/mgo.v2/bson"
 
 	"github.com/gorilla/mux"
-	. "github.com/shantanu1995/TestProject.git/config"
-	. "github.com/shantanu1995/TestProject.git/dao"
-	. "github.com/shantanu1995/TestProject.git/models"
+	. "github.com/shantanu1995/TestProject/config"
+	. "github.com/shantanu1995/TestProject/dao"
+	. "github.com/shantanu1995/TestProject/models"
 )
 
 var config = Config{}

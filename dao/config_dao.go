@@ -3,7 +3,7 @@ package dao
 import (
 	"log"
 
-	. "github.com/shantanu1995/TestProject.git/models"
+	. "github.com/shantanu1995/TestProject/models"
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
