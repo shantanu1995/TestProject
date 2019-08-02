@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"time"
-	"strconv"
 
 	"gopkg.in/mgo.v2/bson"
 
@@ -53,7 +52,7 @@ func CreateUserEndPoint(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	respondWithJson(w, http.StatusCreated, map[string]string{"id" : strconv.Itoa(user.ID) , "username" : user.UserName})
+	respondWithJson(w, http.StatusCreated, map[string]string{"id" : user.ID.Hex() , "username" : user.UserName})
 }
 
 // PUT update an existing user
