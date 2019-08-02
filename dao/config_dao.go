@@ -58,7 +58,7 @@ func (m *ConfigDAO) Insert(user User) error {
 
 	} else {
 
-		err := dao.InsertInternal(user);
+		err := ConfigDAO{}.InsertInternal(user);
 
 	}
 
