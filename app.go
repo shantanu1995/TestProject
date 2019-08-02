@@ -58,7 +58,7 @@ func CreateUserEndPoint(w http.ResponseWriter, r *http.Request) {
 // PUT update an existing user
 func UpdateUserEndPoint(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
-	var exerlog exercise
+	var exerlog Exercise
 	if err := json.NewDecoder(r.Body).Decode(&exerlog); err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
 		return

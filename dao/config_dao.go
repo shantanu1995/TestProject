@@ -80,7 +80,7 @@ func (m *ConfigDAO) Delete(user User) error {
 }
 
 // Update an existing user log
-func (m *ConfigDAO) Update(exerlog exercise) error {
+func (m *ConfigDAO) Update(exerlog Exercise) error {
 	count, _ := db.C(COLLECTION).Find(bson.M{ "id" : exerlog.ID}).Count()
 	var err error
 	var user User

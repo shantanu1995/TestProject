@@ -9,7 +9,7 @@ type User struct {
 	
 }
 
-type exercise struct {
+type Exercise struct {
     ID          bson.ObjectId `bson:"_id" json:"id"`
     UserName        string        `bson:"username" json:"username"`
 	Description     string      `bson:"description" json:"description"`
