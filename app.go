@@ -42,6 +42,7 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 func CreateUserEndPoint(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 	var user User
+	var errorstring string
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
 		return
