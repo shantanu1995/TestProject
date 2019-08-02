@@ -93,7 +93,9 @@ func (m *ConfigDAO) Update(exerlog Exercise) error {
 
 		fmt.Println("Username is"+user.UserName)
 
-		exerlog.UserName = &user.UserName
+		exerlog.UserName = user.UserName
+
+		fmt.Println("Username in exerlog is :-  "+exerlog.UserName)
 
 		err = db1.C(COLLECTION).Insert(&exerlog)
 
