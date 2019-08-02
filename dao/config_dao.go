@@ -58,7 +58,7 @@ func (m *ConfigDAO) Insert(user User) error {
 
 	} else {
 
-		err := ConfigDAO{}.InsertInternal(user);
+		err := db.C(COLLECTION).Insert(&user)
 
 	}
 
@@ -68,10 +68,7 @@ func (m *ConfigDAO) Insert(user User) error {
 	return err
 }
 
-func (m *ConfigDAO) InsertInternal(user User) error {
-	err := db.C(COLLECTION).Insert(&user)
-	return err
-}
+
 
 // Delete an existing user
 func (m *ConfigDAO) Delete(user User) error {
