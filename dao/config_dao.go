@@ -8,7 +8,6 @@ import (
 	"gopkg.in/mgo.v2/bson"
 	"errors"
 	"fmt"
-	"strconv"
 )
 
 type ConfigDAO struct {
