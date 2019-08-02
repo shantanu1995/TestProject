@@ -8,6 +8,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 	"fmt"
 	"strconv"
+	"errors"
 )
 
 type ConfigDAO struct {
@@ -51,13 +52,26 @@ func (m *ConfigDAO) Insert(user User) error {
 
 	count, _ := db.C(COLLECTION).Find(bson.M{ "username" : user.UserName}).Count()
 
-	fmt.Printf(strconv.Itoa(count))
+	var err error
+
+	if count > 0 {
+
+		err := errors.New("Username already used")
+
+	} else {
+
+		err := InsertInternal(user)
+
+	}
 
 	
 
+	
+	return err
+}
+
+func (m *ConfigDAO) InsertInternal(user User) error {
 	err := db.C(COLLECTION).Insert(&user)
-
-	
 	return err
 }
 
