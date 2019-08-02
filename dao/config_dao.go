@@ -44,7 +44,7 @@ func (m *ConfigDAO) FindById(id string) (User, error) {
 
 // Insert a user into database
 func (m *ConfigDAO) Insert(user User) error {
-	db.C(COLLECTION).createIndex({username: 1}, {unique: true})
+	db.C(COLLECTION).createIndex( { "username": 1}, { unique: true} )
 	err := db.C(COLLECTION).Insert(&user)
 	return err
 }
