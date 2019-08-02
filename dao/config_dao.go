@@ -12,6 +12,7 @@ import (
 type ConfigDAO struct {
 	Server   string
 	Database string
+	Database1 string
 }
 
 var db *mgo.Database
@@ -27,6 +28,7 @@ func (m *ConfigDAO) Connect() {
 		log.Fatal(err)
 	}
 	db = session.DB(m.Database)
+	db1 = session.DB(m.Database1)
 }
 
 // Find list of users
@@ -76,8 +78,24 @@ func (m *ConfigDAO) Delete(user User) error {
 	return err
 }
 
-// Update an existing user
-func (m *ConfigDAO) Update(user User) error {
-	err := db.C(COLLECTION).UpdateId(user.ID, &user)
+// Update an existing user log
+func (m *ConfigDAO) Update(exerlog exercise) error {
+	count, _ := db.C(COLLECTION).Find(bson.M{ "id" : exerlog.ID}).Count()
+	var err error
+	var user User
+	err = db.C(COLLECTION).Find(bson.M{ "id" : exerlog.ID}).One(&user)
+	if count > 0 {
+
+		exerlog.UserName = user.UserName
+
+		err = db1.C(COLLECTION).Insert(&exerlog)
+
+	} else {
+
+		err = errors.New("UserId is not present")
+
+
+	}
+	
 	return err
 }

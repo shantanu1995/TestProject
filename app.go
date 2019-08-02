@@ -58,19 +58,19 @@ func CreateUserEndPoint(w http.ResponseWriter, r *http.Request) {
 // PUT update an existing user
 func UpdateUserEndPoint(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
-	var user User
-	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
+	var exerlog exercise
+	if err := json.NewDecoder(r.Body).Decode(&exerlog); err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
 		return
 	}
-	if user.Date == "" {
-		user.Date = time.Now().Format("01-02-2006")
+	if exerlog.Date == "" {
+		exerlog.Date = time.Now().Format("01-02-2006")
 	}
-	if err := dao.Update(user); err != nil {
+	if err := dao.Update(exerlog); err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	respondWithJson(w, http.StatusOK, user)
+	respondWithJson(w, http.StatusOK, exerlog)
 }
 
 // DELETE an existing user
@@ -105,6 +105,7 @@ func init() {
 
 	dao.Server = config.Server
 	dao.Database = config.Database
+	dao.Database1 = config.Database1
 	dao.Connect()
 }
 
