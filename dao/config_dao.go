@@ -6,8 +6,6 @@ import (
 	. "github.com/shantanu1995/TestProject/models"
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
-	"fmt"
-	"strconv"
 	"errors"
 )
 
@@ -60,7 +58,7 @@ func (m *ConfigDAO) Insert(user User) error {
 
 	} else {
 
-		err := InsertInternal(user)
+		err := dao.InsertInternal(user);
 
 	}
 
