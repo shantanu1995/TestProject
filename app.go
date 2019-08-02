@@ -47,8 +47,13 @@ func CreateUserEndPoint(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	user.ID = bson.NewObjectId()
-	if err := dao.Insert(user); err != nil {
+	if erroring , err := dao.Insert(user); err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	if erroring != nil {
+		respondWithError(w, http.StatusInternalServerError, erroring)
 		return
 	}
 	respondWithJson(w, http.StatusCreated, user)

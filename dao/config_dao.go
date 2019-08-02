@@ -47,12 +47,18 @@ func (m *ConfigDAO) Insert(user User) error {
 	
 	count , _ := db.C(COLLECTION).Find(bson.M{"username" : user.UserName}).Count()
 
+	var erroring string
+
 	if count > 0 {
-		err := "Username already exists"
+		erroring = "Username already exists"
+		
 	}else{
 	err := db.C(COLLECTION).Insert(&user)
+
 	}
-	return err
+
+	return erroring , err
+	
 }
 
 // Delete an existing user
