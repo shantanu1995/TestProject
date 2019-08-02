@@ -61,9 +61,9 @@ func UpdateUserEndPoint(w http.ResponseWriter, r *http.Request) {
 		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
 		return
 	}
-	/*if user.Date == "" {
+	if user.Date == "" {
 		user.Date = time.Now().Format("01-02-2006")
-	}*/
+	}
 	if err := dao.Update(user); err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
