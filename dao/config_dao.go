@@ -7,6 +7,7 @@ import (
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 	"fmt"
+	"strconv"
 )
 
 type ConfigDAO struct {
@@ -50,7 +51,7 @@ func (m *ConfigDAO) Insert(user User) (string, error) {
 
 	count, _ := db.C(COLLECTION).Find(bson.M{ "username" : user.UserName}).Count()
 
-	fmt.Printf(count)
+	fmt.Printf(strconv.Itoa(count))
 
 	if count > 0 {
 		errorstring = "Username already taken"
