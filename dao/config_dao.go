@@ -43,15 +43,16 @@ func (m *ConfigDAO) FindById(id string) (User, error) {
 }
 
 // Insert a user into database
-func (m *ConfigDAO) Insert(user User) (string,error) {
+func (m *ConfigDAO) Insert(user User) (string, error) {
 
 	var errorstring string
 
-	count, _ := db.C(COLLECTION).Find(bson.M{ "username" : user.UserName}).Count()
+	count, err := db.C(COLLECTION).Find(bson.M{ "username" : user.UserName}).Count()
 
 	if count > 0 {
 		errorstring = "Username already taken"
-	}else {
+
+	} else {
 
 	err := db.C(COLLECTION).Insert(&user)
 
