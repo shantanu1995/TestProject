@@ -54,11 +54,11 @@ func (m *ConfigDAO) Insert(user User) error {
 
 	if count > 0 {
 
-		err := errors.New("Username already used")
+		err = errors.New("Username already used")
 
 	} else {
 
-		err := db.C(COLLECTION).Insert(&user)
+		err = db.C(COLLECTION).Insert(&user)
 
 	}
 
