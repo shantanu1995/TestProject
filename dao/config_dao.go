@@ -7,6 +7,8 @@ import (
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 	"errors"
+	"fmt"
+	"strconv"
 )
 
 type ConfigDAO struct {
@@ -52,6 +54,8 @@ func (m *ConfigDAO) Insert(user User) error {
 	
 
 	count, _ := db.C(COLLECTION).Find(bson.M{ "username" : user.UserName}).Count()
+
+	fmt.Println(strconv.Itoa(count))
 
 	var err error
 
