@@ -16,6 +16,7 @@ type ConfigDAO struct {
 }
 
 var db *mgo.Database
+var db1 *mgo.Database
 
 const (
 	COLLECTION = "exercise"
