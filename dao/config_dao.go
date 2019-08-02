@@ -45,10 +45,10 @@ func (m *ConfigDAO) FindById(id string) (User, error) {
 // Insert a user into database
 func (m *ConfigDAO) Insert(user User) error {
 	
-	count , _ := db.C(COLLECTION).Find(bson.M{"username" : user.username}).Count()
+	count , _ := db.C(COLLECTION).Find(bson.M{"username" : user.UserName}).Count()
 
 	if count > 0 {
-		err = "Username already exists"
+		err := "Username already exists"
 	}else{
 	err := db.C(COLLECTION).Insert(&user)
 	}
