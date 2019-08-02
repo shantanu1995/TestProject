@@ -91,6 +91,8 @@ func (m *ConfigDAO) Update(exerlog Exercise) error {
 	err = db.C(COLLECTION).Find(bson.M{ "_id" : exerlog.ID}).One(&user)
 	if count > 0 {
 
+		fmt.Println("Username is"+user.UserName)
+
 		exerlog.UserName = user.UserName
 
 		err = db1.C(COLLECTION).Insert(&exerlog)
