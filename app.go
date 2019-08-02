@@ -52,7 +52,7 @@ func CreateUserEndPoint(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	respondWithJson(w, http.StatusCreated, user)
+	respondWithJson(w, http.StatusCreated, map[string]string{"id" : user.ID , "username" : user.UserName})
 }
 
 // PUT update an existing user
