@@ -87,7 +87,7 @@ func (m *ConfigDAO) Update(exerlog Exercise) error {
 	count, _ := db.C(COLLECTION).Find(bson.M{ "_id" : exerlog.ID}).Count()
 	var err error
 	var user User
-	fmt.Println(exerlog.ID.Hex())
+	fmt.Println(exerlog.ID)
 	err = db.C(COLLECTION).Find(bson.M{ "_id" : exerlog.ID}).One(&user)
 	if count > 0 {
 
