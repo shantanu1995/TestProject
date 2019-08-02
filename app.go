@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"time"
 
 	"gopkg.in/mgo.v2/bson"
 
@@ -61,11 +62,14 @@ func UpdateUserEndPoint(w http.ResponseWriter, r *http.Request) {
 		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
 		return
 	}
+	if user.Date == "" {
+		user.Date = time.Now().Format("01-02-2006")
+	}
 	if err := dao.Update(user); err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	respondWithJson(w, http.StatusOK, map[string]string{"result": "success"})
+	respondWithJson(w, http.StatusOK, user)
 }
 
 // DELETE an existing user
@@ -108,7 +112,7 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/api/exercise/users", AllUsersEndPoint).Methods("GET")
 	r.HandleFunc("/api/exercise/new-user", CreateUserEndPoint).Methods("POST")
-	r.HandleFunc("/api/exercise/add", UpdateUserEndPoint).Methods("PUT")
+	r.HandleFunc("/api/exercise/add", UpdateUserEndPoint).Methods("POST")
 	r.HandleFunc("/api/exercise/delete-user", DeleteUserEndPoint).Methods("DELETE")
 	r.HandleFunc("/api/exercise/user/{id}", FindUserEndpoint).Methods("GET")
 	if err := http.ListenAndServe(":3000", r); err != nil {
