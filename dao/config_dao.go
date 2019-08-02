@@ -44,8 +44,7 @@ func (m *ConfigDAO) FindById(id string) (User, error) {
 
 // Insert a user into database
 func (m *ConfigDAO) Insert(user User) error {
-	var count
-
+	
 	count , _ := db.C(COLLECTION).Find(bson.M{"username" : user.username}).Count()
 
 	if count > 0 {
