@@ -55,7 +55,7 @@ func (m *ConfigDAO) Insert(user User) error {
 
 	count, _ := db.C(COLLECTION).Find(bson.M{ "username" : user.UserName}).Count()
 
-	fmt.Println(strconv.Itoa(count))
+
 
 	var err error
 
@@ -88,6 +88,7 @@ func (m *ConfigDAO) Update(exerlog Exercise) error {
 	count, _ := db.C(COLLECTION).Find(bson.M{ "id" : exerlog.ID}).Count()
 	var err error
 	var user User
+	fmt.Println(strconv.Itoa(count))
 	err = db.C(COLLECTION).Find(bson.M{ "id" : exerlog.ID}).One(&user)
 	if count > 0 {
 
