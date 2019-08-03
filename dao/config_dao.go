@@ -94,7 +94,7 @@ func (m *ConfigDAO) Update(exerlog Exercise) (Exercise,error) {
 		fmt.Println("Username is"+user.UserName)
 
 		exerlog.UserName = user.UserName
-		exerlog.ID = bson.NewObjectId()
+		exerlog.ID = bson.NewObjectId().Hex()
 
 		fmt.Println("Username in exerlog is :-  "+exerlog.UserName)
 
