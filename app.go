@@ -41,6 +41,8 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 	limit := limits[0]
 
 	fmt.Printf(string(limit))
+	fmt.Printf(string(from))
+	fmt.Printf(string(to))
 	var exerciselog ExerciseLog
 	var tempexerciselog []TempExercise
 	user, exercise ,count , err := dao.FindById(id)
