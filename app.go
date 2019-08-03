@@ -45,7 +45,7 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf(string(to))
 	var exerciselog ExerciseLog
 	var tempexerciselog []TempExercise
-	user, exercise ,count , err := dao.FindById(id)
+	user, exercise ,count , err := dao.FindById(string(id))
 	if err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid User ID")
 		return
