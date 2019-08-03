@@ -38,7 +38,7 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	b , _ := json.Marshal(exercise)
-	_ := json.NewDecoder(b).Decode(&tempexerciselog);
+	json.Unmarshal([]byte(string(b)), &tempexerciselog)
 	exerciselog.ID = user.ID
 	exerciselog.UserName = user.UserName
 	exerciselog.Count = count
