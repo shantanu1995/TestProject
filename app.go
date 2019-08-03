@@ -66,11 +66,12 @@ func UpdateUserEndPoint(w http.ResponseWriter, r *http.Request) {
 	if exerlog.Date == "" {
 		exerlog.Date = time.Now().Format("01-02-2006")
 	}
-	if err := dao.Update(exerlog); err != nil {
+	exerlog1,err := dao.Update(exerlog);
+	if  err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	respondWithJson(w, http.StatusOK, exerlog)
+	respondWithJson(w, http.StatusOK, exerlog1)
 }
 
 // DELETE an existing user
