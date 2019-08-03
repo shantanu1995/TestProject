@@ -30,7 +30,7 @@ func AllUsersEndPoint(w http.ResponseWriter, r *http.Request) {
 
 // GET a user by its ID
 func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
-	ids, _ := r.URL.Query()
+	ids := r.URL.Query()
 
 	id := ids.Get("id")
 	from := ids.Get("from")
