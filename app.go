@@ -73,7 +73,7 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 		dateStamp, _ := time.Parse("2012-02-01", exercise[i].Date); 
 		dateStamp2, _ := time.Parse("2012-02-01", from); 
 		
-		if (!(dateStamp.After(dateStamp2) || dateStamp === dateStamp2)) {
+		if (!(dateStamp.After(dateStamp2) || dateStamp.Equal(dateStamp2))) {
 
 		
 
@@ -95,7 +95,7 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 
 		dateStamp, _ := time.Parse("2012-02-01", exercise[i].Date); 
 		dateStamp2, _ := time.Parse("2012-02-01", to); 
-		if (!(dateStamp.Before(dateStamp2) || dateStamp === dateStamp2)) {
+		if (!(dateStamp.Before(dateStamp2) || dateStamp.Equal(dateStamp2))) {
 
 		
 
