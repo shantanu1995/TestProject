@@ -7,6 +7,7 @@ import (
 	"time"
 	"fmt"
 	"strconv"
+	"github.com/thoas/go-funk"
 
 	"gopkg.in/mgo.v2/bson"
 
@@ -14,6 +15,7 @@ import (
 	. "github.com/shantanu1995/TestProject/config"
 	. "github.com/shantanu1995/TestProject/dao"
 	. "github.com/shantanu1995/TestProject/models"
+
 )
 
 var config = Config{}
@@ -28,6 +30,8 @@ func AllUsersEndPoint(w http.ResponseWriter, r *http.Request) {
 	}
 	respondWithJson(w, http.StatusOK, users)
 }
+
+
 
 // GET a user by its ID
 func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
@@ -58,6 +62,27 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid User ID")
 		return
+	}
+
+	if from != nil {
+
+		exercise = funk.Filter(exercise, func(x Exercise) bool { dateStamp, _ := time.Parse("2012-02-01", x.Date); dateStamp2, _ := time.Parse("2012-02-01", from); return dateStamp.After(dateStamp2.AddDate(0, 0, -1)) }).([]Exercise)
+
+
+
+	}
+
+	if to != nil {
+
+		exercise = funk.Filter(exercise, func(x Exercise) bool { dateStamp, _ := time.Parse("2012-02-01", x.Date); dateStamp2, _ := time.Parse("2012-02-01", to); return dateStamp.Before(dateStamp2.AddDate(0, 0, +1)) }).([]Exercise)
+
+
+	}
+
+	if from != nil && to != nil {
+
+		exercise = funk.Filter(exercise, func(x Exercise) bool { dateStamp, _ := time.Parse("2012-02-01", x.Date); dateStamp2, _ := time.Parse("2012-02-01", to); dateStamp3, _ := time.Parse("2012-02-01", from); return dateStamp.After(dateStamp3.AddDate(0, 0, -1)) && dateStamp.Before(dateStamp2.AddDate(0, 0, +1)) }).([]Exercise)
+
 	}
 
 	b , _ := json.Marshal(exercise)
