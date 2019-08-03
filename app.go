@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
 	"fmt"
+	"strconv"
 
 	"gopkg.in/mgo.v2/bson"
 
@@ -37,6 +38,17 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 	to := ids.Get("to")
 	limit := ids.Get("limit")
 
+	var limit1 int
+	limit1 = 0
+
+	if limit != "" {
+
+	limit1 = strconv.Atoi(limit)
+
+
+	}
+
+
 	fmt.Printf(limit)
 	fmt.Printf(from)
 	fmt.Printf(to)
@@ -47,14 +59,26 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 		respondWithError(w, http.StatusBadRequest, "Invalid User ID")
 		return
 	}
+	if 
+
 	b , _ := json.Marshal(exercise)
 	json.Unmarshal([]byte(string(b)), &tempexerciselog)
 	exerciselog.ID = user.ID
 	exerciselog.UserName = user.UserName
-	exerciselog.Count = count
+	if limit1 > 0 {
+	exerciselog.Count = limit1
+	exerciselog.Log = tempexerciselog[:limit1]
+	} else{
+
+		exerciselog.Count = count
 	exerciselog.Log = tempexerciselog
+
+
+
+	}
 	respondWithJson(w, http.StatusOK, exerciselog)
 }
+
 
 // POST a new user
 func CreateUserEndPoint(w http.ResponseWriter, r *http.Request) {
