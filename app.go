@@ -30,12 +30,17 @@ func AllUsersEndPoint(w http.ResponseWriter, r *http.Request) {
 // GET a user by its ID
 func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
+	var exerciselog ExerciseLog
 	user, exercise ,count , err := dao.FindById(params["id"])
 	if err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid User ID")
 		return
 	}
-	respondWithJson(w, http.StatusOK, map[string]string{"id" : user.ID.Hex() , "username" : user.UserName , "count" : count , "log" : exercise})
+	exerciselog.ID = user.ID
+	exerciselog.UserName = user.UserName
+	exerciselog.Count = count
+	exerciselog.Log = exercise
+	respondWithJson(w, http.StatusOK, exerciselog)
 }
 
 // POST a new user

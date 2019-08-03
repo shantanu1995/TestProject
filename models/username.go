@@ -17,3 +17,12 @@ type Exercise struct {
 	Date            string      `bson:"date" json:"date"`
 
 }
+
+type ExerciseLog struct {
+	ID          bson.ObjectId `bson:"_id" json:"id"`
+    UserName        string        `bson:"username" json:"username"`
+    Count          int          `bson:"count" json:"count"`
+    Log            []Exercise  `bson:"log" json:"log"`
+
+
+}
