@@ -43,7 +43,7 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 
 	if limit != "" {
 
-	limit1 = strconv.Atoi(limit)
+	limit1, _= strconv.Atoi(limit)
 
 
 	}
