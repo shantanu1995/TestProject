@@ -71,6 +71,7 @@ func UpdateUserEndPoint(w http.ResponseWriter, r *http.Request) {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+	exerlog1.ID = exerlog.ID
 	respondWithJson(w, http.StatusOK, exerlog1)
 }
 
