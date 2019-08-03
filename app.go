@@ -60,8 +60,6 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("to :-" + to)
 	var exerciselog ExerciseLog
 	var tempexerciselog []TempExercise
-	var dateStamp time.Time
-	var dateStamp2 time.Time
 	user, exercise ,count , err := dao.FindById(id)
 	if err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid User ID")
@@ -72,8 +70,8 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 
 		for i := 0; i < len(exercise); i++ { 
 
-		dateStamp, _ = time.Parse("2012-02-01", exercise[i].Date); 
-		dateStamp2, _ = time.Parse("2012-02-01", from); 
+		dateStamp, _ := time.Parse("2012-02-01", exercise[i].Date); 
+		dateStamp2, _ := time.Parse("2012-02-01", from); 
 		
 		if (!(dateStamp.After(dateStamp2) || dateStamp == dateStamp2)) {
 
@@ -95,8 +93,8 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 
 		for i := 0; i < len(exercise); i++ { 
 
-		dateStamp, _ = time.Parse("2012-02-01", exercise[i].Date); 
-		dateStamp2, _ = time.Parse("2012-02-01", to); 
+		dateStamp, _ := time.Parse("2012-02-01", exercise[i].Date); 
+		dateStamp2, _ := time.Parse("2012-02-01", to); 
 		if (!(dateStamp.Before(dateStamp2) || dateStamp == dateStamp2)) {
 
 		
