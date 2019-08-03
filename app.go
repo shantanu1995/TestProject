@@ -30,22 +30,19 @@ func AllUsersEndPoint(w http.ResponseWriter, r *http.Request) {
 
 // GET a user by its ID
 func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
-	ids, _ := r.URL.Query()["id"]
-	froms,_:= r.URL.Query()["from"]
-	tos,_:= r.URL.Query()["to"]
-	limits,_:= r.URL.Query()["limit"]
+	ids, _ := r.URL.Query()
 
-	id := ids[0]
-	from := froms[0]
-	to := tos[0]
-	limit := limits[0]
+	id := ids.Get("id")
+	from := ids.Get("from")
+	to := ids.Get("to")
+	limit := ids.Get("limit")
 
-	fmt.Printf(string(limit))
-	fmt.Printf(string(from))
-	fmt.Printf(string(to))
+	fmt.Printf(limit)
+	fmt.Printf(from)
+	fmt.Printf(to)
 	var exerciselog ExerciseLog
 	var tempexerciselog []TempExercise
-	user, exercise ,count , err := dao.FindById(string(id))
+	user, exercise ,count , err := dao.FindById(id)
 	if err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid User ID")
 		return
