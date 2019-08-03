@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"time"
+	"fmt"
 
 	"gopkg.in/mgo.v2/bson"
 
@@ -30,6 +31,7 @@ func AllUsersEndPoint(w http.ResponseWriter, r *http.Request) {
 // GET a user by its ID
 func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
+	fmt.Printf(params["limit"])
 	var exerciselog ExerciseLog
 	var tempexerciselog []TempExercise
 	user, exercise ,count , err := dao.FindById(params["id"])
@@ -126,7 +128,7 @@ func main() {
 	r.HandleFunc("/api/exercise/new-user", CreateUserEndPoint).Methods("POST")
 	r.HandleFunc("/api/exercise/add", UpdateUserEndPoint).Methods("POST")
 	r.HandleFunc("/api/exercise/delete-user", DeleteUserEndPoint).Methods("DELETE")
-	r.HandleFunc("/api/exercise/log/{id}", FindUserEndpoint).Methods("GET")
+	r.HandleFunc("/api/exercise/log/{id}&{from}&{to}&{limit}", FindUserEndpoint).Methods("GET")
 	if err := http.ListenAndServe(":3000", r); err != nil {
 		log.Fatal(err)
 	}
