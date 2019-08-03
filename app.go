@@ -7,7 +7,6 @@ import (
 	"time"
 	"fmt"
 	"strconv"
-	"github.com/thoas/go-funk"
 
 	"gopkg.in/mgo.v2/bson"
 
@@ -31,6 +30,9 @@ func AllUsersEndPoint(w http.ResponseWriter, r *http.Request) {
 	respondWithJson(w, http.StatusOK, users)
 }
 
+func remove(s []Exercise, i int) []Exercise {
+    return append(s[:i], s[i+1:]...)
+}
 
 
 // GET a user by its ID
@@ -58,6 +60,8 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf(to)
 	var exerciselog ExerciseLog
 	var tempexerciselog []TempExercise
+	var dateStamp time.Time
+	var dateStamp2 time.Time
 	user, exercise ,count , err := dao.FindById(id)
 	if err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid User ID")
@@ -66,7 +70,17 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 
 	if from != "" {
 
-		exercise = funk.Filter(exercise, func(x Exercise) bool { dateStamp, _ := time.Parse("2012-02-01", x.Date); dateStamp2, _ := time.Parse("2012-02-01", from); return dateStamp.After(dateStamp2.AddDate(0, 0, -1)) }).([]Exercise)
+		for i := 0; i < len(exercise); i++ { 
+
+		dateStamp, _ = time.Parse("2012-02-01", exercise[i].Date); 
+		dateStamp2, _ = time.Parse("2012-02-01", from); 
+		if !dateStamp.After(dateStamp2.AddDate(0, 0, -1)) {
+
+			exercise = remove(exercise,i)
+
+		}
+
+	}
 
 
 
@@ -74,16 +88,26 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 
 	if to != "" {
 
-		exercise = funk.Filter(exercise, func(x Exercise) bool { dateStamp, _ := time.Parse("2012-02-01", x.Date); dateStamp2, _ := time.Parse("2012-02-01", to); return dateStamp.Before(dateStamp2.AddDate(0, 0, +1)) }).([]Exercise)
+		for i := 0; i < len(exercise); i++ { 
+
+		dateStamp, _ = time.Parse("2012-02-01", exercise[i].Date); 
+		dateStamp2, _ = time.Parse("2012-02-01", to); 
+		if !dateStamp.Before(dateStamp2.AddDate(0, 0, +1)) {
+
+			exercise = remove(exercise,i)
+
+		}
+
+	}
+
 
 
 	}
 
-	if from != "" && to != "" {
-
-		exercise = funk.Filter(exercise, func(x Exercise) bool { dateStamp, _ := time.Parse("2012-02-01", x.Date); dateStamp2, _ := time.Parse("2012-02-01", "2019-03-09"); dateStamp3, _ := time.Parse("2012-02-01", from); return dateStamp.After(dateStamp3.AddDate(0, 0, -1)) && dateStamp.Before(dateStamp2.AddDate(0, 0, +1)) }).([]Exercise)
-
+	if len(exercise) != count {
+		count = len(exercise)
 	}
+	
 
 	b , _ := json.Marshal(exercise)
 	json.Unmarshal([]byte(string(b)), &tempexerciselog)
