@@ -31,15 +31,18 @@ func AllUsersEndPoint(w http.ResponseWriter, r *http.Request) {
 func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	var exerciselog ExerciseLog
+	var tempexerciselog []TempExercise
 	user, exercise ,count , err := dao.FindById(params["id"])
 	if err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid User ID")
 		return
 	}
+	b , _ := json.Marshal(exercise)
+	_ := json.NewDecoder(b).Decode(&tempexerciselog);
 	exerciselog.ID = user.ID
 	exerciselog.UserName = user.UserName
 	exerciselog.Count = count
-	exerciselog.Log = exercise
+	exerciselog.Log = tempexerciselog
 	respondWithJson(w, http.StatusOK, exerciselog)
 }
 
@@ -69,7 +72,7 @@ func UpdateUserEndPoint(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if exerlog.Date == "" {
-		exerlog.Date = time.Now().Format("01-02-2006")
+		exerlog.Date = time.Now().Format("2006-02-01")
 	}
 	exerlog1,err := dao.Update(exerlog);
 	if  err != nil {
@@ -123,7 +126,7 @@ func main() {
 	r.HandleFunc("/api/exercise/new-user", CreateUserEndPoint).Methods("POST")
 	r.HandleFunc("/api/exercise/add", UpdateUserEndPoint).Methods("POST")
 	r.HandleFunc("/api/exercise/delete-user", DeleteUserEndPoint).Methods("DELETE")
-	r.HandleFunc("/api/exercise/user/{id}", FindUserEndpoint).Methods("GET")
+	r.HandleFunc("/api/exercise/log/{id}", FindUserEndpoint).Methods("GET")
 	if err := http.ListenAndServe(":3000", r); err != nil {
 		log.Fatal(err)
 	}

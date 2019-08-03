@@ -22,7 +22,16 @@ type ExerciseLog struct {
 	ID          bson.ObjectId `bson:"_id" json:"id"`
     UserName        string        `bson:"username" json:"username"`
     Count          int          `bson:"count" json:"count"`
-    Log            []Exercise  `bson:"log" json:"log"`
+    Log            []TempExercise  `bson:"log" json:"log"`
+
+
+}
+
+type TempExercise struct {
+
+	Description     string      `bson:"description" json:"description"`
+	Duration        string      `bson:"duration" json:"duration"`
+	Date            string      `bson:"date" json:"date"`
 
 
 }
