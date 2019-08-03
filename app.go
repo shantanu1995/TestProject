@@ -56,8 +56,8 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 
 
 	fmt.Printf(limit)
-	fmt.Printf(from)
-	fmt.Printf(to)
+	fmt.Printf("from:-" + from)
+	fmt.Printf("to :-" + to)
 	var exerciselog ExerciseLog
 	var tempexerciselog []TempExercise
 	var dateStamp time.Time
@@ -74,8 +74,10 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 
 		dateStamp, _ = time.Parse("2012-02-01", exercise[i].Date); 
 		dateStamp2, _ = time.Parse("2012-02-01", from); 
-		fmt.Printf("Value is:-"+ exercise[i].Date)
-		if !dateStamp.After(dateStamp2) {
+		
+		if !(dateStamp.After(dateStamp2) || dateStamp == dateStamp2) {
+
+			fmt.Printf("Value is:-"+ exercise[i].Date)
 
 			exercise = remove(exercise,i)
 
@@ -93,7 +95,7 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 
 		dateStamp, _ = time.Parse("2012-02-01", exercise[i].Date); 
 		dateStamp2, _ = time.Parse("2012-02-01", to); 
-		if !dateStamp.Before(dateStamp2) {
+		if !(dateStamp.Before(dateStamp2) || dateStamp == dateStamp2) {
 
 			exercise = remove(exercise,i)
 
