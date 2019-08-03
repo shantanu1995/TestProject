@@ -59,7 +59,6 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 		respondWithError(w, http.StatusBadRequest, "Invalid User ID")
 		return
 	}
-	if 
 
 	b , _ := json.Marshal(exercise)
 	json.Unmarshal([]byte(string(b)), &tempexerciselog)
