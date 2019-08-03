@@ -64,7 +64,7 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if from != nil {
+	if from != "" {
 
 		exercise = funk.Filter(exercise, func(x Exercise) bool { dateStamp, _ := time.Parse("2012-02-01", x.Date); dateStamp2, _ := time.Parse("2012-02-01", from); return dateStamp.After(dateStamp2.AddDate(0, 0, -1)) }).([]Exercise)
 
@@ -72,14 +72,14 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 
 	}
 
-	if to != nil {
+	if to != "" {
 
 		exercise = funk.Filter(exercise, func(x Exercise) bool { dateStamp, _ := time.Parse("2012-02-01", x.Date); dateStamp2, _ := time.Parse("2012-02-01", to); return dateStamp.Before(dateStamp2.AddDate(0, 0, +1)) }).([]Exercise)
 
 
 	}
 
-	if from != nil && to != nil {
+	if from != "" && to != "" {
 
 		exercise = funk.Filter(exercise, func(x Exercise) bool { dateStamp, _ := time.Parse("2012-02-01", x.Date); dateStamp2, _ := time.Parse("2012-02-01", to); dateStamp3, _ := time.Parse("2012-02-01", from); return dateStamp.After(dateStamp3.AddDate(0, 0, -1)) && dateStamp.Before(dateStamp2.AddDate(0, 0, +1)) }).([]Exercise)
 
