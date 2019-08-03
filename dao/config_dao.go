@@ -41,10 +41,21 @@ func (m *ConfigDAO) FindAll() ([]User, error) {
 }
 
 // Find a user by its id
-func (m *ConfigDAO) FindById(id string) (User, error) {
+func (m *ConfigDAO) FindById(id string) (User, []Exercise , int,  error) {
 	var user User
-	err := db.C(COLLECTION).FindId(bson.ObjectIdHex(id)).One(&user)
-	return user, err
+	var err error
+	var exercise []Exercise
+	err = db.C(COLLECTION).FindId(bson.ObjectIdHex(id)).One(&user)
+
+	err = db1.C(COLLECTION).Find(bson.M{ "username" : user.UserName}).All(&exercise)
+
+	count, _ := db1.C(COLLECTION).Find(bson.M{ "username" : user.UserName}).Count() 
+
+
+
+
+
+	return user, exercise , count , err
 }
 
 // Insert a user into database
