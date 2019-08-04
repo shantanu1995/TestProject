@@ -201,7 +201,7 @@ func respondWithError(w http.ResponseWriter, code int, msg string) {
 func respondWithJson(w http.ResponseWriter, code int, payload interface{}) {
 	response, _ := json.Marshal(payload)
 	w.Header().Set("Content-Type", "application/json")
-	w.Header().Add("Access-Control-Allow-Origin", "http://localhost:3001")
+	w.Header().Add("Access-Control-Allow-Origin", "*")
 		w.Header().Add("Access-Control-Allow-Methods", "POST, OPTIONS, GET, DELETE, PUT")
     w.Header().Add("Access-Control-Allow-Headers", "Content-Type")
 	w.WriteHeader(code)
