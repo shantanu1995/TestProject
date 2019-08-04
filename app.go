@@ -77,9 +77,9 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 		fmt.Printf("from is:-" + from)
 		fmt.Printf("dateStamp is:-" + dateStamp.String())
 		fmt.Printf("dateStamp2 is:-" + dateStamp2.String())
-		fmt.Printf("In range:-" + strconv.FormatBool(dateStamp.After(dateStamp2)))
+		fmt.Printf("In range:-" + strconv.FormatBool(dateStamp.After(dateStamp2.AddDate(0, 0, -1))))
 		
-		if (!(dateStamp.After(dateStamp2) || dateStamp.Equal(dateStamp2))) {
+		if (!dateStamp.After(dateStamp2.AddDate(0, 0, -1))) {
 
 		
 
@@ -99,8 +99,8 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 
 		for i := 0; i < len(exercise); i++ { 
 
-		dateStamp, _ := time.Parse("2012-02-01", exercise[i].Date); 
-		dateStamp2, _ := time.Parse("2012-02-01", to); 
+		dateStamp, _ := time.Parse("2006-01-02", exercise[i].Date); 
+		dateStamp2, _ := time.Parse("2006-01-02", to); 
 		if (!(dateStamp.Before(dateStamp2) || dateStamp.Equal(dateStamp2))) {
 
 		
