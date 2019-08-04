@@ -223,7 +223,7 @@ func main() {
 	r.HandleFunc("/api/exercise/add", UpdateUserEndPoint).Methods("POST")
 	r.HandleFunc("/api/exercise/delete-user", DeleteUserEndPoint).Methods("DELETE")
 	r.HandleFunc("/api/exercise/log", FindUserEndpoint).Methods("GET")
-	if err := http.ListenAndServe(":2700", r); err != nil {
+	if err := http.ListenAndServe(":3001", r); err != nil {
 		log.Fatal(err)
 	}
 }
