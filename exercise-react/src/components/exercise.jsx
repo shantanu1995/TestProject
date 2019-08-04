@@ -19,7 +19,7 @@ class Exercise extends Component {
     })
       .then(res => res.json())
       .then(json => {
-        console.log(json);
+        alert(JSON.stringify(json));
       });
     event.preventDefault();
   }
