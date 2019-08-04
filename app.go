@@ -200,10 +200,11 @@ func respondWithError(w http.ResponseWriter, code int, msg string) {
 
 func respondWithJson(w http.ResponseWriter, code int, payload interface{}) {
 	response, _ := json.Marshal(payload)
+	header := w.Header()
+    header.Add("Access-Control-Allow-Origin", "*")
+    header.Add("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
+    header.Add("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
 	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, DELETE, PUT")
-    w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	w.WriteHeader(code)
 	w.Write(response)
 }
@@ -222,8 +223,8 @@ func init() {
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/api/exercise/users", AllUsersEndPoint).Methods("GET")
-	r.HandleFunc("/api/exercise/new-user", CreateUserEndPoint).Methods("POST")
-	r.HandleFunc("/api/exercise/add", UpdateUserEndPoint).Methods("POST")
+	r.HandleFunc("/api/exercise/new-user", CreateUserEndPoint).Methods("POST","OPTIONS")
+	r.HandleFunc("/api/exercise/add", UpdateUserEndPoint).Methods("POST","OPTIONS")
 	r.HandleFunc("/api/exercise/delete-user", DeleteUserEndPoint).Methods("DELETE")
 	r.HandleFunc("/api/exercise/log", FindUserEndpoint).Methods("GET")
 	if err := http.ListenAndServe(":3000", r); err != nil {
