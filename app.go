@@ -223,8 +223,8 @@ func init() {
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/api/exercise/users", AllUsersEndPoint).Methods("GET")
-	r.HandleFunc("/api/exercise/new-user", CreateUserEndPoint).Methods("POST","OPTIONS")
-	r.HandleFunc("/api/exercise/add", UpdateUserEndPoint).Methods("POST","OPTIONS")
+	r.HandleFunc("/api/exercise/new-user", CreateUserEndPoint).Methods("POST")
+	r.HandleFunc("/api/exercise/add", UpdateUserEndPoint).Methods("POST")
 	r.HandleFunc("/api/exercise/delete-user", DeleteUserEndPoint).Methods("DELETE")
 	r.HandleFunc("/api/exercise/log", FindUserEndpoint).Methods("GET")
 	if err := http.ListenAndServe(":3000", r); err != nil {
