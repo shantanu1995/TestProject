@@ -72,12 +72,15 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 
 		dateStamp, _ := time.Parse("2012-02-01", exercise[i].Date); 
 		dateStamp2, _ := time.Parse("2012-02-01", from); 
+
+		fmt.Printf("Value is:-" + exercise[i].Date)
+		fmt.Printf("In range:-" + dateStamp.After(dateStamp2))
 		
 		if (!(dateStamp.After(dateStamp2) || dateStamp.Equal(dateStamp2))) {
 
 		
 
-			fmt.Printf("Value is:-"+ exercise[i].Date)
+			fmt.Printf("Value is:-" + exercise[i].Date)
 
 			exercise = remove(exercise,i)
 
