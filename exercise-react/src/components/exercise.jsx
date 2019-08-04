@@ -8,7 +8,6 @@ class Exercise extends Component {
   handleSubmit(event) {
     fetch("http://localhost:3000/api/exercise/new-user", {
       method: "POST",
-
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
