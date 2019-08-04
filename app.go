@@ -87,6 +87,7 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 			fmt.Printf("Value is:-" + exercise[i].Date)
 
 			exercise = remove(exercise,i)
+			i=i-1
 
 		}
 
@@ -107,6 +108,7 @@ func FindUserEndpoint(w http.ResponseWriter, r *http.Request) {
 		
 
 			exercise = remove(exercise,i)
+			i=i-1
 
 		}
 
