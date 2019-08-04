@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styles from "./styling.css";
 class Exercise extends Component {
   constructor(props) {
     super(props);
@@ -73,56 +74,88 @@ class Exercise extends Component {
     return (
       <div className="container">
         <h1>Exercise tracker</h1>
-        <div>
-          <form
-            name="usercreate"
-            className="form-create-user"
-            onSubmit={this.handleSubmit}
-          >
-            <h3>Create a New User</h3>
-            <p>
-              <code>POST /api/exercise/new-user</code>
-            </p>
-            <input
-              type="text"
-              ref="username"
-              name="username"
-              placeholder="username"
-              onChange={this.handleChange}
-            />
-            <input type="submit" value="Submit" />
-          </form>
 
-          <form
-            name="usercreate1"
-            className="form-create-user1"
-            onSubmit={this.handleSubmit1}
-          >
-            <h3>Add exercises</h3>
-            <p>
-              <code>POST /api/exercise/add</code>
-            </p>
+        <form
+          style={{ backgroundColor: "#00FF00" }}
+          name="usercreate"
+          className="form-create-user"
+          onSubmit={this.handleSubmit}
+        >
+          <h3>Create a New User</h3>
+          <p>
+            <code>POST /api/exercise/new-user</code>
+          </p>
+          <input
+            type="text"
+            ref="username"
+            name="username"
+            placeholder="username"
+            onChange={this.handleChange}
+          />
+          <input type="submit" value="Submit" />
+        </form>
+
+        <div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+        <div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+
+        <form
+          style={{ backgroundColor: "#00FF00" }}
+          name="usercreate1"
+          className="form-create-user1"
+          onSubmit={this.handleSubmit1}
+        >
+          <h3>Add exercises</h3>
+          <p>
+            <code>POST /api/exercise/add</code>
+          </p>
+          <td>
             <input ref="uid" type="text" name="userId" placeholder="userId*" />
+          </td>
+          <td>
             <input
               ref="desc"
               type="text"
               name="description"
               placeholder="description*"
             />
+          </td>
+          <td>
             <input
               ref="dur"
               type="text"
               name="duration"
               placeholder="duration* (mins.)"
             />
+          </td>
+          <td>
             <input
               ref="dat"
               type="text"
               name="date"
               placeholder="date (yyyy-mm-dd)"
             />
+          </td>
+          <td>
             <input type="submit" value="Submit" />
-          </form>
+          </td>
+        </form>
+        <div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+        <div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
         <p>
           <strong>GET users's exercise log: </strong>
