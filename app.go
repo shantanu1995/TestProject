@@ -7,6 +7,7 @@ import (
 	"time"
 	"fmt"
 	"strconv"
+	"github.com/gorilla/handlers"
 
 	"gopkg.in/mgo.v2/bson"
 
@@ -221,16 +222,13 @@ func init() {
 // Define HTTP request routes
 func main() {
 	r := mux.NewRouter()
-	r.Methods("OPTIONS").HandlerFunc(
-    func(w http.ResponseWriter, r *http.Request){
-    myHttpLib.OptionsForBrowserPreflight(w, r)
-})
+
 	r.HandleFunc("/api/exercise/users", AllUsersEndPoint).Methods("GET")
 	r.HandleFunc("/api/exercise/new-user", CreateUserEndPoint).Methods("POST")
 	r.HandleFunc("/api/exercise/add", UpdateUserEndPoint).Methods("POST")
 	r.HandleFunc("/api/exercise/delete-user", DeleteUserEndPoint).Methods("DELETE")
 	r.HandleFunc("/api/exercise/log", FindUserEndpoint).Methods("GET")
-	if err := http.ListenAndServe(":3000", r); err != nil {
+	if err := http.ListenAndServe(":3000", handlers.CORS(handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"}), handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "OPTIONS"}), handlers.AllowedOrigins([]string{"*"}))(r)); err != nil {
 		log.Fatal(err)
 	}
 }
