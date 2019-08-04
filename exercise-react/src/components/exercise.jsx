@@ -6,14 +6,12 @@ class Exercise extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(event) {
-    fetch("http://localhost:2700/api/exercise/new-user", {
+    fetch("http://localhost:3000/api/exercise/new-user", {
       method: "POST",
 
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:2700",
-        "Access-Control-Allow-Credentials": "true"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         username: this.refs.username.value
