@@ -23,6 +23,28 @@ class Exercise extends Component {
       });
     event.preventDefault();
   }
+  handleSubmit1(event) {
+    fetch("http://localhost:3000/api/exercise/add", {
+      method: "POST",
+
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id: this.refs.uid.value,
+        description: this.refs.desc.value,
+        duration: this.refs.dur.value,
+        date: this.refs.dat.value
+      })
+    })
+      .then(res => res.json())
+      .then(json => {
+        alert(JSON.stringify(json));
+      });
+    event.preventDefault();
+  }
+
   handleEmailChange = e => {
     this.setState({ username: e.target.value });
   };
@@ -49,26 +71,30 @@ class Exercise extends Component {
           />
           <input type="submit" value="Submit" />
         </form>
-        <form>
+        <form
+          name="usercreate1"
+          className="form-create-user1"
+          onSubmit={this.handleSubmit1}
+        >
           <h3>Add exercises</h3>
           <p>
             <code>POST /api/exercise/add</code>
           </p>
-          <input id="uid" type="text" name="userId" placeholder="userId*" />
+          <input ref="uid" type="text" name="userId" placeholder="userId*" />
           <input
-            id="desc"
+            ref="desc"
             type="text"
             name="description"
             placeholder="description*"
           />
           <input
-            id="dur"
+            ref="dur"
             type="text"
             name="duration"
             placeholder="duration* (mins.)"
           />
           <input
-            id="dur"
+            ref="dat"
             type="text"
             name="date"
             placeholder="date (yyyy-mm-dd)"
