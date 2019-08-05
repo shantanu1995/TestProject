@@ -13,6 +13,10 @@ class Exercise extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmit1 = this.handleSubmit1.bind(this);
   }
+  styles = {
+    fontSize: 20,
+    fontWeight: "bold"
+  };
   handleSubmit(event) {
     fetch("http://localhost:3000/api/exercise/new-user", {
       method: "POST",
@@ -72,13 +76,13 @@ class Exercise extends Component {
   state = {};
   render() {
     return (
-      <div className="container">
+      <div className="container  badge-secondary">
         <h1>Exercise tracker</h1>
 
         <form
-          style={{ backgroundColor: "#00FF00" }}
           name="usercreate"
-          className="form-create-user"
+          className="badge badge-primary m-2"
+          style={this.styles}
           onSubmit={this.handleSubmit}
         >
           <h3>Create a New User</h3>
@@ -90,9 +94,15 @@ class Exercise extends Component {
             ref="username"
             name="username"
             placeholder="username"
+            className="m-3"
             onChange={this.handleChange}
+            required
           />
-          <input type="submit" value="Submit" />
+          <input
+            type="submit"
+            value="Submit"
+            className="btn btn-secondary btn-sm"
+          />
         </form>
 
         <div>
@@ -107,17 +117,23 @@ class Exercise extends Component {
         </div>
 
         <form
-          style={{ backgroundColor: "#00FF00" }}
           name="usercreate1"
-          className="form-create-user1"
+          className="badge badge-warning m-2"
           onSubmit={this.handleSubmit1}
         >
           <h3>Add exercises</h3>
           <p>
-            <code>POST /api/exercise/add</code>
+            <code style={{ fontSize: 20 }}>POST /api/exercise/add</code>
           </p>
           <td>
-            <input ref="uid" type="text" name="userId" placeholder="userId*" />
+            <input
+              ref="uid"
+              type="text"
+              name="userId"
+              placeholder="userId*"
+              className="m-3"
+              required
+            />
           </td>
           <td>
             <input
@@ -125,6 +141,8 @@ class Exercise extends Component {
               type="text"
               name="description"
               placeholder="description*"
+              className="m-3"
+              required
             />
           </td>
           <td>
@@ -132,19 +150,28 @@ class Exercise extends Component {
               ref="dur"
               type="text"
               name="duration"
+              pattern="[0-9]*"
               placeholder="duration* (mins.)"
+              className="m-3"
+              required
             />
           </td>
           <td>
             <input
               ref="dat"
               type="text"
+              pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
               name="date"
+              className="m-3"
               placeholder="date (yyyy-mm-dd)"
             />
           </td>
           <td>
-            <input type="submit" value="Submit" />
+            <input
+              type="submit"
+              value="Submit"
+              className="btn btn-secondary btn-sm"
+            />
           </td>
         </form>
         <div>
@@ -157,16 +184,19 @@ class Exercise extends Component {
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
-        <p>
+        <p className="badge badge-success m-2" style={{ fontSize: 20 }}>
           <strong>GET users's exercise log: </strong>
           <code>
             GET /api/exercise/log?(id)[&amp;from][&amp;to][&amp;limit]
           </code>
         </p>
-        <p>
+        <div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+        <p className="badge badge-info m-2" style={{ fontSize: 20 }}>
           <strong>()</strong> = required, <strong>[ ]</strong> = optional
         </p>
-        <p>
+        <p className="badge badge-info m-2" style={{ fontSize: 20 }}>
           <strong>from, to</strong> = dates (yyyy-mm-dd); <strong>limit</strong>{" "}
           = number
         </p>
